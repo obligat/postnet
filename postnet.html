@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post question</title>
+    <script>
+
+        let input = '45056-5555';
+
+        function verify(input) {
+            let verifiedNum = [];
+            let cd = 0;
+            let splitInput = input.split("");
+            let sum = splitInput.reduce(function (a, b) {
+                if (b !== '-') {
+                    a = parseInt(a) + parseInt(b);
+                }
+                return a;
+            });
+            verifiedNum = input.slice(0, 5) + input.slice(6, 10);    //verifiedNum='450561234'
+            if (sum % 10 === 0) {
+                verifiedNum += '0';
+            }
+            else {
+                cd = (10 - sum % 10).toString();
+                verifiedNum += cd;
+            }
+            return verifiedNum;
+        }
+
+        function matchCode(verifiedNum) {
+            let barcodes = [];
+            let arr = verifiedNum.split('');
+            for (let code of arr) {
+                switch (code) {
+                    case '1' :
+                        barcodes.push(':::||');
+                        break;
+                    case '2':
+                        barcodes.push('::|:|');
+                        break;
+                    case '3':
+                        barcodes.push('::||:');
+                        break;
+                    case '4':
+                        barcodes.push(':|::|');
+                        break;
+                    case '5':
+                        barcodes.push(':|:|:');
+                        break;
+                    case '6':
+                        barcodes.push(':||::');
+                        break;
+                    case '7':
+                        barcodes.push('|:::|');
+                        break;
+                    case '8':
+                        barcodes.push('|::|:');
+                        break;
+                    case '9':
+                        barcodes.push('|:|::');
+                        break;
+                    case '0':
+                        barcodes.push('||:::');
+                        break;
+                }
+            }
+            return barcodes;
+        }
+
+
+        function print(barcodes) {
+            let text = 'Validation Check:       ' + input + '   ==   |' + barcodes.join("") + '|' + '\n' + 'cd is ' + verify(input).slice(-1);
+            return text;
+        }
+
+
+        function numIntoBar(input) {
+            return print(matchCode(verify(input)));
+        }
+
+        console.log(numIntoBar(input));
+
+
+        let inp = ['|:|::|:|:|:||::::|:|::||:::::||::|:|::||:::||::::|||'];
+
+
+
+
+
+        function splitBars(input) {
+            let splitedBars = [];
+            let arr = input.slice(1, -1);
+
+        }
+
+
+
+        let barcode='|||::: ::||: ||::: |:|:: |:::||';
+
+
+        function codeTurnNum(barcode) {
+            let nums=matchNum(splitBars(barcode));
+            printII(nums);
+        }
+
+        function splitCode(input) {
+            let splitedCodes=[];
+            input=input.slice(1,-1);
+            splitedCodes.push(input.splice(" "));
+            return splitedCodes;
+        }
+/*
+        function matchBinary(splitedCodes) {
+           let matchedCodes= splitedCodes.map(function (item) {
+                for(let i of item){
+                    if(i===':'){
+                        i=0;
+                    }
+                    else {
+                        i=1;
+                    }
+                }
+                return item;
+            });
+            return matchedCodes;
+        }*/
+        function loadAllCodes() {
+            return[
+                {1:':::||'},
+                {2:'::|:|'},
+                {3:'::||:'},
+                {4:':|::|'},
+                {5:':|:|:'},
+                {6:':||::'},
+                {7:'|:::|'},
+                {8:'|::|:'},
+                {9:'|:|::'},
+                {0:'||:::'}
+            ];
+        }
+        function matchNum(splitedCodes) {
+            let allCodes = loadAllCodes();
+            let matchedNum = '';
+
+            for(let i=0;i<splitedCodes.length;i++){
+                for(let j=0;j<allCodes.length;j++){
+                    if(splitedCodes[i]===allCodes[j]){
+                        matchedNum+=j;
+                    }
+                }
+            }
+
+            return matchedNum;
+        }
+
+        function printII(nums) {
+            let text = 'Validation Check:       ' + nums.join("") + '   ==   '+input+ '\n' + 'cd is ' + nums.slice(-1);
+            return text;
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
