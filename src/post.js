@@ -1,15 +1,17 @@
+
+function isValue(input) {
+    let bool=true;
+    if(true){
+        console.log("Please input your need");
+    }
+    else {
+        console.log("Error!Please react.");
+    }
+    return bool;
+}
+
 function loadAllCodes() {
     return [
-        /*{1:':::||'},
-         {2:'::|:|'},
-         {3:'::||:'},
-         {4:':|::|'},
-         {5:':|:|:'},
-         {6:':||::'},
-         {7:'|:::|'},
-         {8:'|::|:'},
-         {9:'|:|::'},
-         {0:'||:::'}*/
         '||:::', ':::||', '::|:|', '::||:', ':|::|', ':|:|:', ':||::', '|:::|', '|::|:', '|:|::'
     ];
 }
@@ -28,13 +30,20 @@ function matchNum(splitedCodes) {
     let allCodes = loadAllCodes();
     let matchedNum = '';
 
-    for(let i=0;i<splitedCodes.length;i++){
-        for(let j=0;j<allCodes.length;j++){
-            if(splitedCodes[i]===allCodes[j]){
-                matchedNum+=j;
+    for (let i = 0; i < splitedCodes.length; i++) {
+        for (let j = 0; j < allCodes.length; j++) {
+            if (splitedCodes[i] === allCodes[j]) {
+                matchedNum += j;
             }
         }
     }
 
     return matchedNum;
+}
+
+function codeTurnNum(barcode) {
+    let splitedCodes = splitCode(barcode);
+    let nums = matchNum(splitedCodes);
+    let text = 'Validation Check:       ' + barcode + '   ==   ' + parseInt(nums) + '\n' + 'cd is ' + nums.slice(-1);
+    return text;
 }

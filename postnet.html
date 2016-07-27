@@ -82,61 +82,34 @@
         console.log(numIntoBar(input));
 
 
-        let inp = ['|:|::|:|:|:||::::|:|::||:::::||::|:|::||:::||::::|||'];
 
 
 
 
 
-        function splitBars(input) {
-            let splitedBars = [];
-            let arr = input.slice(1, -1);
-
-        }
-
-
-
-        let barcode='|||::: ::||: ||::: |:|:: |:::||';
+        let barcode='|:|::| ::||: ||::: |:|:: |:::| ||:::|';
 
 
         function codeTurnNum(barcode) {
-            let nums=matchNum(splitBars(barcode));
-            printII(nums);
+            let splitedCodes=splitCode(barcode);
+            let nums=matchNum(splitedCodes);
+            let text = 'Validation Check:       ' + barcode + '   ==   '+parseInt(nums)+ '\n' + 'cd is ' + nums.slice(-1);
+            return text;
         }
+        console.log(codeTurnNum(barcode));
 
         function splitCode(input) {
-            let splitedCodes=[];
-            input=input.slice(1,-1);
-            splitedCodes.push(input.splice(" "));
+            let splitedCodes = [];
+            input = input.slice(1, -1).split(" ");
+            for (let item of input) {
+                splitedCodes.push(item);
+            }
             return splitedCodes;
         }
-/*
-        function matchBinary(splitedCodes) {
-           let matchedCodes= splitedCodes.map(function (item) {
-                for(let i of item){
-                    if(i===':'){
-                        i=0;
-                    }
-                    else {
-                        i=1;
-                    }
-                }
-                return item;
-            });
-            return matchedCodes;
-        }*/
+
         function loadAllCodes() {
             return[
-                {1:':::||'},
-                {2:'::|:|'},
-                {3:'::||:'},
-                {4:':|::|'},
-                {5:':|:|:'},
-                {6:':||::'},
-                {7:'|:::|'},
-                {8:'|::|:'},
-                {9:'|:|::'},
-                {0:'||:::'}
+                '||:::', ':::||', '::|:|', '::||:', ':|::|', ':|:|:', ':||::', '|:::|', '|::|:', '|:|::'
             ];
         }
         function matchNum(splitedCodes) {
@@ -150,14 +123,9 @@
                     }
                 }
             }
-
             return matchedNum;
         }
 
-        function printII(nums) {
-            let text = 'Validation Check:       ' + nums.join("") + '   ==   '+input+ '\n' + 'cd is ' + nums.slice(-1);
-            return text;
-        }
 
 
     </script>
