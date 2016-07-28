@@ -69,15 +69,12 @@
         }
 
 
-        function print(barcodes) {
+        function numIntoBar(input) {
+            let barcodes=matchCode(verify(input));
             let text = 'Validation Check:       ' + input + '   ==   |' + barcodes.join("") + '|' + '\n' + 'cd is ' + verify(input).slice(-1);
             return text;
         }
 
-
-        function numIntoBar(input) {
-            return print(matchCode(verify(input)));
-        }
 
         console.log(numIntoBar(input));
 
@@ -87,13 +84,22 @@
 
 
 
-        let barcode='|:|::| ::||: ||::: |:|:: |:::| ||:::|';
+//        let barcode='|:|::| ::||: ||::: |:|:: |:::| :|::| ::||: ||::: |:|:: |::|:|';
+        let barcode='|:||:: ::||: ::||: ||::: |:|:: |:::||';
 
 
         function codeTurnNum(barcode) {
             let splitedCodes=splitCode(barcode);
             let nums=matchNum(splitedCodes);
-            let text = 'Validation Check:       ' + barcode + '   ==   '+parseInt(nums)+ '\n' + 'cd is ' + nums.slice(-1);
+            let text='';
+
+            if(nums.length===6){
+                text += 'Validation Check:       ' + barcode + '   ==   '+parseInt(nums.slice(0,-1))+ '\n' + 'cd is ' + nums.slice(-1);
+            }
+            else if(nums.length===10){
+                text += 'Validation Check:       ' + barcode + '   ==   '+nums.slice(0,5)+'-'+nums.slice(5,9)+ '\n' + 'cd is ' + nums.slice(-1);
+
+            }
             return text;
         }
         console.log(codeTurnNum(barcode));
